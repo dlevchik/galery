@@ -1,0 +1,5 @@
+add regex to script password validation
+manage exceptions properly
+add email validation
+
+ADD REGEX EVERYWHERE

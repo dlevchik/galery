@@ -1,0 +1,609 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+[hidden] {
+  display: none !important; }
+
+.modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 10;
+  overflow-y: auto;
+  background-color: rgba(47, 79, 79, 0.7);
+  opacity: 0;
+  -webkit-transition: opacity .3s;
+  transition: opacity .3s; }
+
+.modalContent {
+  overflow: hidden;
+  position: absolute;
+  display: inline-block;
+  margin: 15px auto 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content; }
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 20px; }
+  body.modalOpen {
+    overflow: hidden; }
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto; }
+
+a {
+  color: inherit; }
+
+.button {
+  width: auto;
+  display: block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #4141a1;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  -webkit-transition: background-color .3s, color .3s, border-radius .3s;
+  transition: background-color .3s, color .3s, border-radius .3s; }
+  .button:active {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95); }
+  .button:focus, .button:hover {
+    background-color: white;
+    color: black;
+    border-radius: 0; }
+
+header {
+  padding: 15px 0;
+  border-bottom: 1px solid; }
+  header .mainPageLink {
+    text-decoration: none; }
+    header .mainPageLink:hover {
+      text-decoration: underline; }
+  header .profileLink {
+    text-decoration: none;
+    border-bottom: 1px dotted black; }
+    header .profileLink:hover {
+      font-style: italic;
+      border-bottom-style: solid; }
+  header .message-container {
+    min-width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    list-style: none;
+    z-index: 15; }
+    header .message-container li {
+      padding: 15px;
+      padding-right: 30px;
+      position: relative;
+      background-color: rgba(0, 128, 128, 0.7);
+      border: 1px solid black;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      -webkit-transition: opacity 1s, -webkit-transform 1s;
+      transition: opacity 1s, -webkit-transform 1s;
+      transition: transform 1s, opacity 1s;
+      transition: transform 1s, opacity 1s, -webkit-transform 1s; }
+      header .message-container li .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: transparent;
+        border: none;
+        font-size: 1.5rem; }
+      header .message-container li:hover {
+        background-color: teal; }
+      header .message-container li.success {
+        background-color: rgba(76, 205, 50, 0.7);
+        border-color: teal; }
+        header .message-container li.success:hover {
+          background-color: #4ccd32; }
+      header .message-container li.error {
+        background-color: rgba(255, 99, 71, 0.7);
+        border-color: tomato; }
+        header .message-container li.error:hover {
+          background-color: tomato; }
+  header .loginModal form {
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: darkslategray;
+    color: white; }
+    header .loginModal form input:not([type=submit]) {
+      padding: 5px;
+      margin-top: 15px;
+      border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+      outline: none;
+      color: white;
+      font-size: 1.2rem;
+      -webkit-transition: background-color .3s, color .3s;
+      transition: background-color .3s, color .3s; }
+      header .loginModal form input:not([type=submit]):focus {
+        background-color: white;
+        color: black; }
+  header .addPhotoButton {
+    position: absolute;
+    right: 60px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.3rem;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s; }
+    header .addPhotoButton .plus {
+      -webkit-transition: background-color .3s, -webkit-transform .3s;
+      transition: background-color .3s, -webkit-transform .3s;
+      transition: background-color .3s, transform .3s;
+      transition: background-color .3s, transform .3s, -webkit-transform .3s;
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg); }
+    header .addPhotoButton:hover {
+      -webkit-transform: scale(1.3);
+              transform: scale(1.3); }
+      header .addPhotoButton:hover .plus {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+        color: green; }
+    header .addPhotoButton:focus {
+      outline: none; }
+  header .buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+            align-items: baseline; }
+  header .registration {
+    margin-left: 15px;
+    font-weight: bold;
+    background-color: green; }
+    header .registration:hover {
+      background-color: limegreen;
+      color: white; }
+  header .signIn {
+    font-size: 1.3rem; }
+    header .signIn:hover {
+      background-color: mediumpurple; }
+  header .signOut:hover {
+    background-color: tomato; }
+  header .addPicture form {
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 60%;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: darkslategray;
+    color: white; }
+    header .addPicture form .drop {
+      padding: 10px 15px;
+      border: 2px dashed #ccc;
+      border-radius: 20px;
+      -webkit-transition: border-color .3s, background-color .3s, color .3s;
+      transition: border-color .3s, background-color .3s, color .3s; }
+      header .addPicture form .drop.highlight {
+        border-color: black;
+        background-color: white;
+        color: black; }
+      header .addPicture form .drop .preview {
+        overflow: hidden;
+        display: block;
+        margin: 15px auto 0 auto;
+        width: auto;
+        height: auto; }
+        header .addPicture form .drop .preview img {
+          width: 100%;
+          height: 100%; }
+    header .addPicture form input[type=text], header .addPicture form textarea {
+      padding: 5px;
+      margin-top: 15px;
+      border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+      outline: none;
+      color: white;
+      font-size: 1.2rem;
+      -webkit-transition: background-color .3s, color .3s;
+      transition: background-color .3s, color .3s; }
+      header .addPicture form input[type=text]:focus, header .addPicture form textarea:focus {
+        background-color: white;
+        color: black; }
+    header .addPicture form textarea {
+      resize: vertical;
+      overflow-y: hidden;
+      height: 100px; }
+    header .addPicture form input[type=submit] {
+      width: 60%;
+      margin: 15px auto 0 auto; }
+
+main {
+  background-color: darkslategray;
+  padding: 15px 0; }
+  main .container {
+    background-color: whitesmoke;
+    border-radius: 15px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    padding: 10px; }
+  main .GalleryItem {
+    height: 200px;
+    width: auto;
+    margin: 5px;
+    overflow: hidden;
+    position: relative;
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+    -webkit-transition: opacity 1s, -webkit-transform 1s;
+    transition: opacity 1s, -webkit-transform 1s;
+    transition: transform 1s, opacity 1s;
+    transition: transform 1s, opacity 1s, -webkit-transform 1s; }
+    main .GalleryItem .title {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      background-color: rgba(47, 79, 79, 0.7);
+      color: whitesmoke;
+      text-align: center;
+      -webkit-transition: opacity .3s;
+      transition: opacity .3s; }
+    main .GalleryItem img {
+      width: auto;
+      height: 100%; }
+    main .GalleryItem .description {
+      display: none; }
+    main .GalleryItem:hover .title, main .GalleryItem:hover .delete {
+      opacity: 1; }
+    main .GalleryItem .delete {
+      opacity: 0;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: rgba(79, 47, 47, 0.7);
+      border-radius: 0;
+      color: whitesmoke;
+      text-align: center;
+      -webkit-transition: opacity .3s, background-color .3s;
+      transition: opacity .3s, background-color .3s; }
+      main .GalleryItem .delete:hover {
+        background-color: tomato; }
+  main .modalPicture .container {
+    background-color: transparent;
+    padding: 20px 0;
+    border-radius: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+  main .modalPicture picture {
+    max-width: 80vw;
+    height: auto;
+    margin-right: 20px;
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+    -webkit-transition: opacity .5s, -webkit-transform .5s;
+    transition: opacity .5s, -webkit-transform .5s;
+    transition: transform .5s, opacity .5s;
+    transition: transform .5s, opacity .5s, -webkit-transform .5s; }
+    main .modalPicture picture img {
+      width: 100%;
+      height: 100%; }
+  main .modalPicture .info {
+    color: white;
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+    -webkit-transition: opacity .5s, -webkit-transform .5s;
+    transition: opacity .5s, -webkit-transform .5s;
+    transition: transform .5s, opacity .5s;
+    transition: transform .5s, opacity .5s, -webkit-transform .5s; }
+    main .modalPicture .info .title {
+      font-size: 1.3rem; }
+    main .modalPicture .info .description {
+      margin: 15px 0; }
+    main .modalPicture .info .download {
+      padding: 10px 15px;
+      text-decoration: none; }
+  main .modalPicture .arrow {
+    position: fixed;
+    border: none;
+    background-color: transparent;
+    color: white;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+    main .modalPicture .arrow:focus {
+      outline: none; }
+    main .modalPicture .arrow.disabled {
+      display: none; }
+  main .modalPicture .arrow-left {
+    left: 50px; }
+  main .modalPicture .arrow-right {
+    right: 50px; }
+
+.registration .container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+.registration form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 15px;
+  background-color: #4141a1;
+  color: white;
+  border-radius: 20px; }
+  .registration form h2 {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px 20px 0 0;
+    background-color: #38387c;
+    text-align: center; }
+  .registration form .fields {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 10px 15px; }
+    .registration form .fields input:not([type=submit]) {
+      margin: 10px;
+      padding: 7px 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none; }
+    .registration form .fields input[type=submit] {
+      width: 60%;
+      margin: 15px auto 15px auto;
+      background-color: #38387c; }
+      .registration form .fields input[type=submit]:hover {
+        background-color: limegreen;
+        color: white; }
+
+.profilepage .container {
+  position: relative; }
+.profilepage .profileOptionsButton {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+  display: inline;
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+  cursor: pointer;
+  -webkit-transition: color .3s, -webkit-transform .3s;
+  transition: color .3s, -webkit-transform .3s;
+  transition: transform .3s, color .3s;
+  transition: transform .3s, color .3s, -webkit-transform .3s; }
+  .profilepage .profileOptionsButton:hover {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+    color: #4141a1; }
+  .profilepage .profileOptionsButton:focus {
+    outline: none; }
+.profilepage .profile-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  border-bottom: 2px solid gray; }
+  .profilepage .profile-info .profilePic {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black; }
+    .profilepage .profile-info .profilePic img {
+      width: 100%;
+      height: 100%; }
+  .profilepage .profile-info .profile-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center; }
+    .profilepage .profile-info .profile-text .username {
+      position: relative; }
+  .profilepage .profile-info .description {
+    position: relative;
+    margin: 15px 0; }
+  .profilepage .profile-info .newProfilePicForm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; }
+    .profilepage .profile-info .newProfilePicForm .newProfilePicButton {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(47, 79, 79, 0.7);
+      color: whitesmoke;
+      cursor: pointer;
+      opacity: 0;
+      -webkit-transition: opacity .3s;
+      transition: opacity .3s; }
+      .profilepage .profile-info .newProfilePicForm .newProfilePicButton span {
+        text-align: center; }
+    .profilepage .profile-info .newProfilePicForm:hover .newProfilePicButton {
+      opacity: 1; }
+  .profilepage .profile-info .edit {
+    padding: 0;
+    margin: 0;
+    display: inline;
+    border: none;
+    background: transparent;
+    font-size: inherit;
+    cursor: pointer; }
+    .profilepage .profile-info .edit:hover {
+      color: #4141a1; }
+  .profilepage .profile-info .editForm {
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: whitesmoke;
+    font-weight: bold;
+    z-index: 5; }
+    .profilepage .profile-info .editForm input[type=text] {
+      background-color: transparent;
+      display: inline;
+      font-size: inherit;
+      border: none;
+      font-weight: bold; }
+    .profilepage .profile-info .editForm textarea {
+      background-color: transparent;
+      display: inline;
+      resize: vertical;
+      overflow: hidden;
+      font-size: inherit;
+      line-height: inherit; }
+  .profilepage .profile-info .editCancell:hover {
+    color: red; }
+  .profilepage .profile-info .editAccept:hover {
+    color: green; }
+  .profilepage .profile-info #editDescription .editCancell, .profilepage .profile-info #editDescription .editAccept {
+    font-size: 2rem; }
+
+.profileOptions {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: darkslategray;
+  color: white; }
+  .profileOptions h2 {
+    text-align: center; }
+  .profileOptions table td[colspan="2"] {
+    text-align: center; }
+  .profileOptions table td {
+    width: 200px; }
+  .profileOptions table .button {
+    width: 100%;
+    height: 100%;
+    margin: 5px; }
+  .profileOptions table input:not(.button) {
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid black;
+    background-color: transparent;
+    outline: none;
+    color: white;
+    font-size: 1.2rem;
+    -webkit-transition: background-color .3s, color .3s;
+    transition: background-color .3s, color .3s; }
+    .profileOptions table input:not(.button):focus {
+      background-color: white;
+      color: black; }
+  .profileOptions table .cancelOptions:hover {
+    background-color: tomato;
+    color: white; }
+  .profileOptions table .saveOptions:hover {
+    background-color: limegreen;
+    color: white; }
+
+.notFound-page .container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 60vh; }
+
+footer {
+  padding: 15px 0; }
+
+/*# sourceMappingURL=style.css.map */
